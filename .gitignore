@@ -1,0 +1,6 @@
+/bower_components/
+/dist/
+/node_modules/
+/downloads/
+
+/app/node_modules/

@@ -1,0 +1,32 @@
+@import "./normalize.css";
+
+$primary-color: green;
+
+h1 {
+  color: $primary-color;
+}
+
+li.task {
+  list-style-type: none;
+
+  label {
+    padding: 0 10px;
+  }
+}
+
+.pads {
+	height: 100px;
+	margin: 5px;
+	width: 100px;
+	float: left;
+	border-radius: 3px;
+	border-width: 2px;
+	text-align: center;
+	border-style: solid;
+	background-color: #ffffff;
+}
+
+button {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
