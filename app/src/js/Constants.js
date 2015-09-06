@@ -10,11 +10,12 @@ export default {
     UPDATE_FILE: null,
     TOGGLE_VIEW: null,
     SAMPLE_ADDED: null,  // Client asks for audio from youtube
-    SAMPLE_FETCHED: null // Server goes and loads the youtube audio
+    REGISTER_SAMPLE: null
   }),
 
   ActionSources: keyMirror({
     SERVER_ACTION: null,
-    VIEW_ACTION: null
+    VIEW_ACTION: null,
+    SAMPLE_FETCHED: null // Server goes and loads the youtube audio
   })
 };

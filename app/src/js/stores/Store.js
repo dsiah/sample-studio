@@ -4,14 +4,15 @@ var request = require('request');
 var assign  = require('react/lib/Object.assign');
 var Dispatcher = require('../Dispatcher.js');
 var Constants  = require('../Constants.js');
+var abs = require('audiobuffer-slice');
 
 window.audioContext = window.audioContext || window.webkitAudioContext;
 
 var _view = 'play'; // toggle play - assign
 var _samples = {};  // (max 9) map to pads
 var _availableSamples;
-var context = new AudioContext();
 var _updatedFile = '';
+var context = new AudioContext();
 
 function _downloadAudio(hash) {
   request('http://localhost:8080/song/'+ hash, function(err, r, body) {
@@ -25,22 +26,6 @@ function _toggleView(view) {
 		_view = 'assign';
 	else
 		_view = 'play';
-}
-
-function _assignSample(file, pad) {
-  // (TODO) replace with request library
-  var request = new XMLHttpRequest();
-  request.open('GET','http://localhost:8080/song/' + file.replace('.mp3', ''), true);
-  request.responseType = 'arraybuffer';
-
-  request.onload = function() {
-    context.decodeAudioData(request.response, function(buffer) {
-      _samples[pad] = buffer;
-      console.log(_samples);
-    });
-  }
-
-  request.send();
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
@@ -64,7 +49,33 @@ var AppStore = assign({}, EventEmitter.prototype, {
     return _updatedFile;
   },
 
-  assignSample: _assignSample,
+  registerSample: function(file, pad, start, end) {
+    // (TODO) replace with request library
+    var request = new XMLHttpRequest();
+    request.open('GET','http://localhost:8080/song/' + file.replace('.mp3', ''), true);
+    request.responseType = 'arraybuffer';
+
+    request.onload = function() {
+      context.decodeAudioData(request.response, function(buffer) {
+        abs(buffer, start, end, function(err, nbf) {
+          _samples[pad] = nbf;  
+          console.log(_samples);
+        });
+      });
+    }
+
+    request.send();
+  },
+
+  playSample: function(pad) {
+    console.log(_samples[pad]);
+    if (_samples[pad]) {
+      var source = context.createBufferSource(); // creates a sound source
+      source.buffer = _samples[pad];             // tell the source which sound to play
+      source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+      source.start(0);
+    }
+  },
 
   getAvailableSamples: function() {
     request('http://localhost:8080/availableSongs', function(err, r, body) {

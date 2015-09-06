@@ -16,6 +16,7 @@ var FileDropdown = React.createClass({
 				var vail = JSON.parse(body)['files']; 
 			
       comp.setState({files: vail, loaded: true});
+      Actions.updateFile(vail[0]);
     });
 	},
 

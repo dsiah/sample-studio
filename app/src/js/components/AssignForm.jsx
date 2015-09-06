@@ -8,33 +8,34 @@ var AssignForm = React.createClass({
 	},
 
 	componentDidMount: function() {
-		Store.addChangeListener(this.handler);
+		Store.addChangeListener(this._onChangeSample);
 	},
 
 	componentWillUnmount: function() {
-		Store.removeChangeListener(this.handler);
-	},
-
-	handler: function() {
-		this.setState({sample: Store.getUpdatedFile()}, function() {
-			console.log(this.state);
-		});
+		Store.removeChangeListener(this._onChangeSample);
 	},
 
 	_onChangeTime: function(e) {
-		this.setState({start: e.target.value});
+		this.setState({start: Number(e.target.value)});
 	},
 
 	_onChangeLength: function(e) {
-		this.setState({len: e.target.value});
+		this.setState({len: Number(e.target.value)});
 	},
 
 	_onChangePad: function(e) {
-		this.setState({pad: e.target.value});
+		this.setState({pad: Number(e.target.value)});
 	},
 
-	_onChangeSample: function(e) {
-		this.setState({sample: e.target.value});
+	_onChangeSample: function() {
+		this.setState({sample: Store.getUpdatedFile()});
+	},
+
+	handler: function() {
+		var s = this.state;
+		console.log(this.state);
+		Store.registerSample(s.sample, s.pad, s.start, s.start + s.len);
+		this.setState({sample: Store.getUpdatedFile() , start: 0, len: 0, pad: 1});
 	},
 
 	render: function() {

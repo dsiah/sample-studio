@@ -19,7 +19,7 @@ var Pad = React.createClass({
 	},
 
 	touch: function() {
-		console.log(this.props.id);
+		Store.playSample(this.props.id);
 	},
 
 	render: function() {
