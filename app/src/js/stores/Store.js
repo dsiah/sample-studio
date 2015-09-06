@@ -16,7 +16,7 @@ var context = new AudioContext();
 
 function _downloadAudio(hash) {
   request('http://localhost:8080/song/'+ hash, function(err, r, body) {
-    _availableSamples.push(String(hash) + '.mp3');
+    //_availableSamples.append(String(hash) + '.mp3');
     return String(hash) + '.mp3';
   });
 }

@@ -1,6 +1,14 @@
 import React from 'react';
 import Store from '../stores/Store';
 
+document.onkeypress = function(e) {
+	var charCode = (typeof e.which == "number") ? e.which : e.keyCode;
+	var call = charCode % 49 + 1;
+	if (call < 9 && call > 0) {
+		Store.playSample(call);
+	}
+}
+
 var Pad = React.createClass({
 	getInitialState: function() {
 		return {mode: Store.getView()};
