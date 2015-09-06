@@ -6,6 +6,8 @@ export default {
 
   // Each time you add an action, add it here... They should be past-tense
   ActionTypes: keyMirror({
+    DOWNLOAD: null,
+    UPDATE_FILE: null,
     TOGGLE_VIEW: null,
     SAMPLE_ADDED: null,  // Client asks for audio from youtube
     SAMPLE_FETCHED: null // Server goes and loads the youtube audio

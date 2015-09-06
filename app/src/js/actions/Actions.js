@@ -7,6 +7,20 @@ var Actions = {
 			actionType: Constants.ActionTypes.TOGGLE_VIEW,
 			state: state
 		});
+	},
+
+	download: function(hash) {
+		Dispatcher.handleViewAction({
+			actionType: Constants.ActionTypes.DOWNLOAD,
+			hash: hash
+		});
+	},
+
+	updateFile: function(filename) {
+		Dispatcher.handleViewAction({
+			actionType: Constants.ActionTypes.UPDATE_FILE,
+			filename: filename
+		});
 	}
 };
 

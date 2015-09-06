@@ -1,10 +1,8 @@
 import React from 'react';
 import request from 'request';
-import Store from '../stores/Store';
-
+import Actions from '../actions/Actions';
 
 var FileDropdown = React.createClass({
-	
 	getInitialState: function() {
 		return {loaded: false, files: [1, 2, 3]};
 	},
@@ -21,9 +19,13 @@ var FileDropdown = React.createClass({
     });
 	},
 
+	_onChange: function(e) {
+			Actions.updateFile(e.target.value);
+	},
+
 	render: function() {
 		if (this.state.loaded) {
-			return (<select>
+			return (<select onChange={this._onChange} value={this.state.file}>
 				{this.state.files.map(function(item) {
 					return <option>{item}</option>;
 				})}
