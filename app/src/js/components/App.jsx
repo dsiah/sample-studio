@@ -1,16 +1,16 @@
 import React from 'react';
-import Sequencer from './Sequencer.jsx';
+import Title from './Title.jsx';
+import Sequencer  from './Sequencer.jsx';
+import FetchForm  from './FetchForm.jsx';
 import AssignForm from './AssignForm.jsx';
-import SampleToggle from './SampleToggle.jsx';
-
-
 
 var App = React.createClass({
 	render: function() {
 		return (<div>
+			<Title />
 			<Sequencer />
-			<SampleToggle />
 			<AssignForm />
+			<FetchForm />
 		</div>);
 	}
 });

@@ -38,9 +38,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
   },
 
   getAvailableSamples: function() {
-    request('http://localhost:5000/availableSongs', function(err, r, body) {
+    request('http://localhost:8080/availableSongs', function(err, r, body) {
       _availableSamples = JSON.parse(body)['files'];
       console.log(_availableSamples);
+      return _availableSamples;
     });
   },
 
@@ -54,7 +55,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
   	}
 
   	AppStore.emitChange();
-    
+
   	return true;
   })
 });

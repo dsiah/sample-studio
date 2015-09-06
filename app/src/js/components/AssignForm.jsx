@@ -1,13 +1,14 @@
 import React from 'react';
+import FileDropdown from './FileDropdown.jsx';
 
 var AssignForm = React.createClass({
 	render: function() {
-		return (<div>
+		return (<div className="assign-form twin-containers">
 			<h3>Assign Sounds</h3>
-			<select></select>
-			Start:<input type="time"></input>
-			End:<input type="time"></input>
-			Select Synth<input type="number"></input>
+			<FileDropdown source="http://localhost:8080/availableSongs"/>			
+			<div>Start Time:<input type="number"></input></div>
+			<div>Length(ms):<input type="number"></input></div>
+			<div>Select Pad:<input type="number" min="1" max="9"></input></div>
 			<button>Assign!</button>
 		</div>);
 	}

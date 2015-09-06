@@ -2,10 +2,12 @@ import React from 'react';
 
 var FetchForm = React.createClass({
 	render: function() {
-		return (<div>
+		return (<div id="fetch-form">
 			<h3>Import Sounds (Youtube only)</h3>
-			URL-Hash:<input type="text"></input>
-			<button>Fetch!</button>
+			<div>URL-Hash:
+				<input type="text"></input>
+				<button>Fetch!</button>
+			</div>
 		</div>);
 	}
 });
